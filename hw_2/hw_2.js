@@ -6,7 +6,7 @@ let x = 20;
 let y = 58;
 let z = 42;
 
-let total = x + y + z;
+const total = x + y + z;
 console.log(total);
 
 /* Задача 2.
@@ -35,8 +35,8 @@ console.log(myAgeInSeconds);
 let count = 42;
 let userName = '42';
 
-let countAsString = String(count);
-let userNameAsNumber = +userName;
+const countAsString = String(count);
+const userNameAsNumber = +userName;
 
 console.log(countAsString);
 console.log(userNameAsNumber);
@@ -50,8 +50,8 @@ let a = 1;
 let b = 2;
 let c = 'белых медведей';
 
-let result1 = `${a}${b} ${c}.`
-let result2 = String(a) + String(b) + ' ' + c + '.';
+const result1 = `${a}${b} ${c}.`
+const result2 = String(a) + String(b) + ' ' + c + '.';
 console.log(result1); 
 console.log(result2);
 
@@ -84,3 +84,11 @@ const isClosed = true;
 console.log(`Variable: ${num} have type: ${typeof num}`);
 console.log(`Variable: ${animal} have type: ${typeof animal}`);
 console.log(`Variable: ${isClosed} have type: ${typeof isClosed}`);
+
+/* Задача 7.
+Запросить у пользователя имя и возраст и вывести их в консоль */
+
+const userName1 = prompt ('Please enter your name');
+const userAge = prompt ('Please enter your age');
+
+console.log(`Name: ${userName1}. Age: ${userAge}.`);
