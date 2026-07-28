@@ -81,7 +81,7 @@ const num = prompt ('Please enter a number');
 
 if(num % 3 === 0 && num % 5 === 0){
     console.log('FizBuz');
-}else if(num % 3 == 0){
+}else if(num % 3 === 0){
     console.log('Buz');
 }else if(num % 5 === 0){
     console.log('Fiz');
@@ -119,7 +119,7 @@ if(age >= 16 && age <= 18){
 восток на восток пойдешь разработчиком станешь
 Используйте конструкцию switch . */
 
-const direction = prompt('В какую сторону света вы бы хотели отправиться?').trim().toLowerCase();
+const direction = prompt('В какую сторону света вы бы хотели отправиться?')?.trim().toLowerCase();
 
 switch(direction){
     case 'юг':
