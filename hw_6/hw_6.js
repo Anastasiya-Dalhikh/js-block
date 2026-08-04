@@ -87,9 +87,6 @@ const binary = [0, 0, 0, 0]
 
 const binary = [0, 0, 0, 0];
 
-binary.splice(1, 0, 1);
-binary.splice(3, 0, 1);
-binary.splice(5, 0, 1);
-const str = binary.join('');
+const str = binary.join('1');
 console.log(str);
 
