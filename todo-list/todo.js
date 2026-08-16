@@ -45,28 +45,28 @@ const container = createEl('div', {
     parent: divWrapper
 });
 
-const todoSection = createEl('div', {
-    classes: 'todo-section',
+const todoForm = createEl('form', {
+    classes: 'todo-form',
     parent: container
 });
 
 const deleteAllBtn = createEl('button', {
     classes: 'delete-all-btn',
     text: 'Delete All',
-    parent: todoSection
+    parent: todoForm
 });
 
 const input = createEl('input', {
     classes: 'main-input',
     placeholder: 'Enter todo ...',
     type: 'text',
-    parent: todoSection
+    parent: todoForm
 });
 
 const addBtn = createEl('button', {
     classes: 'add-btn',
     text: 'Add',
-    parent: todoSection
+    parent: todoForm
 });
 
 
