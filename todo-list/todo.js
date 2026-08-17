@@ -21,16 +21,7 @@ function createEl(tag, options = {}) {
     if (options.value){
         el.value = options.value;
     } 
-
-    if (options.children) {
-        options.children.forEach(child => {
-            el.append(child);
-        });
-    }
-    
-    if (options.parent) {
-        options.parent.append(el);
-    }
+ 
     
     return el;
 }
@@ -41,86 +32,86 @@ const divWrapper = createEl('div',{
 });
 
 const container = createEl('div', {
-    classes: 'container',
-    parent: divWrapper
+    classes: 'container'  
 });
 
 const todoForm = createEl('form', {
-    classes: 'todo-form',
-    parent: container
+    classes: 'todo-form'  
 });
 
 const deleteAllBtn = createEl('button', {
     classes: 'delete-all-btn',
-    text: 'Delete All',
-    parent: todoForm
+    text: 'Delete All'    
 });
 
 const input = createEl('input', {
     classes: 'main-input',
     placeholder: 'Enter todo ...',
-    type: 'text',
-    parent: todoForm
+    type: 'text'   
 });
 
 const addBtn = createEl('button', {
     classes: 'add-btn',
-    text: 'Add',
-    parent: todoForm
+    text: 'Add'    
 });
 
-
+divWrapper.append(container);
+container.append(todoForm);
+todoForm.append(deleteAllBtn);
+todoForm.append(input);
+todoForm.append(addBtn);
 
 function createTodo(text, date = ''){
     const todo1 = createEl('div', {
-    classes: 'first-todo-container',
-    // parent: container
+    classes: 'first-todo-container'  
 });
 
 const checkbox = createEl('input', {
     classes: 'todo-checkbox',
-    type: 'checkbox',
-
+    type: 'checkbox'
 });
 
 const customCheckbox = createEl('span', {
-    classes: 'custom-checkmark',
-        
+    classes: 'custom-checkmark'       
 });
 
 const checkboxLabel = createEl('label', {
-    classes: 'todo-checkbox-label',
-    children: [checkbox, customCheckbox],
-    parent: todo1
+    classes: 'todo-checkbox-label'   
 });
+
+checkboxLabel.append(checkbox, customCheckbox);
+todo1.append(checkboxLabel);
+
 
 const textSpan = createEl('span',{
     classes: 'todo-text',
-    text: text,
-    parent: todo1
+    text: text   
 }); 
+todo1.append(textSpan);
 
 const deleteBtn = createEl('button',{
     classes: 'todo-delete-btn',
-    text: 'x',
-    parent: todo1
+    text: 'x'
 });
+todo1.append(deleteBtn);
 
 const dateInput = createEl('input',{
     classes: 'todo-date',
     type: 'date',
-    value: date,
-    parent: todo1
+    value: date   
 });
+todo1.append(dateInput);
 
 return todo1;
 
 }
 
-root.append(divWrapper);
+
 
 const newTodo = createTodo('Купить продукты');
 container.append(newTodo); 
 
+const newTodo2 = newTodo.cloneNode(true);
+container.append(newTodo2);
 
-
+root.append(divWrapper);
