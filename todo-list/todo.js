@@ -41,7 +41,8 @@ const todoForm = createEl('form', {
 
 const deleteAllBtn = createEl('button', {
     classes: 'delete-all-btn',
-    text: 'Delete All'    
+    text: 'Delete All',
+    type: 'button'    
 });
 
 const input = createEl('input', {
@@ -52,7 +53,8 @@ const input = createEl('input', {
 
 const addBtn = createEl('button', {
     classes: 'add-btn',
-    text: 'Add'    
+    text: 'Add',
+    type: 'submit'   
 });
 
 divWrapper.append(container);
@@ -102,6 +104,10 @@ const dateInput = createEl('input',{
 });
 todo1.append(dateInput);
 
+checkbox.addEventListener('change', ()=>{
+    todo1.classList.toggle('checked');
+})
+
 return todo1;
 
 }
@@ -111,7 +117,48 @@ return todo1;
 const newTodo = createTodo('Купить продукты');
 container.append(newTodo); 
 
-const newTodo2 = newTodo.cloneNode(true);
-container.append(newTodo2);
+// const newTodo2 = newTodo.cloneNode(true);
+// container.append(newTodo2);
 
 root.append(divWrapper);
+
+
+
+
+container.addEventListener('click', (e)=>{
+    const deleteBtn = e.target.closest('.todo-delete-btn');
+    if(!deleteBtn){
+        return;
+    }
+
+    const todo1 = deleteBtn.closest('.first-todo-container');
+    if(!todo1){
+        return;
+    }
+
+    todo1.remove();
+});
+
+
+todoForm.addEventListener('submit', (e) =>{
+    e.preventDefault();
+
+    const text = input.value.trim();
+
+    if(text === ''){
+        return;
+    }
+
+    if(text){
+        const newTodo = createTodo(text);
+        container.append(newTodo);
+        input.value = '';
+        input.focus();
+    }
+    
+});
+
+deleteAllBtn.addEventListener('click', ()=>{
+    const todos = document.querySelectorAll('.first-todo-container');
+    todos.forEach(todo => todo.remove());
+});
