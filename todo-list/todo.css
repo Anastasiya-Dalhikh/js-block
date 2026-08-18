@@ -107,7 +107,7 @@ body{
     transform: scale(0.95);
 }
 
-.first-todo-container{
+.task-todo-container{
     
     border:3px solid black;
     border-radius: 20px;
@@ -120,12 +120,14 @@ body{
     position:relative;
 }
 
-.first-todo-container.checked{
+.task-todo-container.checked{
     background-color: rgb(184, 173, 173);
+    transition: 0.3s ease;
 }
 
-.first-todo-container.checked .todo-text{ 
+.task-todo-container.checked .todo-text{ 
     text-decoration: line-through;
+    transition: 0.3s ease;
 }
 
 .todo-checkbox {

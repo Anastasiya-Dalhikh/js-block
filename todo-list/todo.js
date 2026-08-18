@@ -64,8 +64,8 @@ todoForm.append(input);
 todoForm.append(addBtn);
 
 function createTodo(text, date = ''){
-    const todo1 = createEl('div', {
-    classes: 'first-todo-container'  
+    const todo = createEl('div', {
+    classes: 'task-todo-container'  
 });
 
 const checkbox = createEl('input', {
@@ -82,33 +82,31 @@ const checkboxLabel = createEl('label', {
 });
 
 checkboxLabel.append(checkbox, customCheckbox);
-todo1.append(checkboxLabel);
+todo.append(checkboxLabel);
 
 
 const textSpan = createEl('span',{
     classes: 'todo-text',
     text: text   
 }); 
-todo1.append(textSpan);
+todo.append(textSpan);
 
 const deleteBtn = createEl('button',{
     classes: 'todo-delete-btn',
     text: 'x'
 });
-todo1.append(deleteBtn);
+todo.append(deleteBtn);
 
 const dateInput = createEl('input',{
     classes: 'todo-date',
     type: 'date',
-    value: date   
+    value: new Date().toISOString().split('T')[0]
 });
-todo1.append(dateInput);
+todo.append(dateInput);
 
-checkbox.addEventListener('change', ()=>{
-    todo1.classList.toggle('checked');
-})
 
-return todo1;
+
+return todo;
 
 }
 
@@ -124,19 +122,44 @@ root.append(divWrapper);
 
 
 
+function checkboxHandler(checkbox){
+    const todo = checkbox.closest('.task-todo-container');
+    if(!todo){
+        return;
+    }
+    todo.classList.toggle('checked');
+}
+
+function deleteBtnHandler(deleteBtn){
+    const todo = deleteBtn.closest('.task-todo-container');
+    if(!todo){
+        return;
+    }
+    todo.remove();
+}
+
+
+
 
 container.addEventListener('click', (e)=>{
+
     const deleteBtn = e.target.closest('.todo-delete-btn');
-    if(!deleteBtn){
+    if(deleteBtn){
+        deleteBtnHandler(deleteBtn);
         return;
     }
 
-    const todo1 = deleteBtn.closest('.first-todo-container');
-    if(!todo1){
+    const checkbox = e.target.closest('.todo-checkbox');
+    if(checkbox){
+        checkboxHandler(checkbox);
         return;
     }
 
-    todo1.remove();
+    const dateInput = e.target.closest('.todo-date');
+    if (dateInput) {
+        dateInput.showPicker(); 
+        return;
+    }
 });
 
 
@@ -159,6 +182,6 @@ todoForm.addEventListener('submit', (e) =>{
 });
 
 deleteAllBtn.addEventListener('click', ()=>{
-    const todos = document.querySelectorAll('.first-todo-container');
+    const todos = document.querySelectorAll('.task-todo-container');
     todos.forEach(todo => todo.remove());
 });
