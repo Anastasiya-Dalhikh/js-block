@@ -41,7 +41,8 @@ const todoForm = createEl('form', {
 
 const deleteAllBtn = createEl('button', {
     classes: 'delete-all-btn',
-    text: 'Delete All'    
+    text: 'Delete All',
+    type: 'button'    
 });
 
 const input = createEl('input', {
@@ -52,7 +53,8 @@ const input = createEl('input', {
 
 const addBtn = createEl('button', {
     classes: 'add-btn',
-    text: 'Add'    
+    text: 'Add',
+    type: 'submit'   
 });
 
 divWrapper.append(container);
@@ -62,8 +64,8 @@ todoForm.append(input);
 todoForm.append(addBtn);
 
 function createTodo(text, date = ''){
-    const todo1 = createEl('div', {
-    classes: 'first-todo-container'  
+    const todo = createEl('div', {
+    classes: 'task-todo-container'  
 });
 
 const checkbox = createEl('input', {
@@ -80,29 +82,31 @@ const checkboxLabel = createEl('label', {
 });
 
 checkboxLabel.append(checkbox, customCheckbox);
-todo1.append(checkboxLabel);
+todo.append(checkboxLabel);
 
 
 const textSpan = createEl('span',{
     classes: 'todo-text',
     text: text   
 }); 
-todo1.append(textSpan);
+todo.append(textSpan);
 
 const deleteBtn = createEl('button',{
     classes: 'todo-delete-btn',
     text: 'x'
 });
-todo1.append(deleteBtn);
+todo.append(deleteBtn);
 
 const dateInput = createEl('input',{
     classes: 'todo-date',
-    type: 'date',
-    value: date   
+    type: 'text',
+    value: new Date().toISOString().split('T')[0].split('-').reverse().join('.')
 });
-todo1.append(dateInput);
+todo.append(dateInput);
 
-return todo1;
+
+
+return todo;
 
 }
 
@@ -111,7 +115,73 @@ return todo1;
 const newTodo = createTodo('Купить продукты');
 container.append(newTodo); 
 
-const newTodo2 = newTodo.cloneNode(true);
-container.append(newTodo2);
+// const newTodo2 = newTodo.cloneNode(true);
+// container.append(newTodo2);
 
 root.append(divWrapper);
+
+
+
+function checkboxHandler(checkbox){
+    const todo = checkbox.closest('.task-todo-container');
+    if(!todo){
+        return;
+    }
+    todo.classList.toggle('checked');
+}
+
+function deleteBtnHandler(deleteBtn){
+    const todo = deleteBtn.closest('.task-todo-container');
+    if(!todo){
+        return;
+    }
+    todo.remove();
+}
+
+
+
+
+container.addEventListener('click', (e)=>{
+
+    const deleteBtn = e.target.closest('.todo-delete-btn');
+    if(deleteBtn){
+        deleteBtnHandler(deleteBtn);
+        return;
+    }
+
+    const checkbox = e.target.closest('.todo-checkbox');
+    if(checkbox){
+        checkboxHandler(checkbox);
+        return;
+    }
+
+    // const dateInput = e.target.closest('.todo-date');
+    // if (dateInput) {
+    //     dateInput.showPicker(); 
+    //     return;
+    // }
+});
+
+
+todoForm.addEventListener('submit', (e) =>{
+    e.preventDefault();
+
+    const text = input.value.trim();
+
+    if(text === ''){
+        return;
+    }
+
+    if(text){
+        const newTodo = createTodo(text);
+        container.append(newTodo);
+        input.value = '';
+        input.focus();
+    }
+    
+});
+
+deleteAllBtn.addEventListener('click', ()=>{
+    const todos = document.querySelectorAll('.task-todo-container');
+    todos.forEach(todo => todo.remove());
+});
