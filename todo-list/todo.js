@@ -99,8 +99,8 @@ todo.append(deleteBtn);
 
 const dateInput = createEl('input',{
     classes: 'todo-date',
-    type: 'date',
-    value: new Date().toISOString().split('T')[0]
+    type: 'text',
+    value: new Date().toISOString().split('T')[0].split('-').reverse().join('.')
 });
 todo.append(dateInput);
 
@@ -155,11 +155,11 @@ container.addEventListener('click', (e)=>{
         return;
     }
 
-    const dateInput = e.target.closest('.todo-date');
-    if (dateInput) {
-        dateInput.showPicker(); 
-        return;
-    }
+    // const dateInput = e.target.closest('.todo-date');
+    // if (dateInput) {
+    //     dateInput.showPicker(); 
+    //     return;
+    // }
 });
 
 

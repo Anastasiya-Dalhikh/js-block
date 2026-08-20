@@ -247,6 +247,14 @@ body{
     outline: none;
     cursor: pointer;
     transition: all 0.2s;
+
+    max-width: 120px;
+    width:100%;
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    color:rgb(81, 76, 76);
 }
 
 .todo-date:focus{
