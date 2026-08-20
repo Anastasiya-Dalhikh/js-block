@@ -68,6 +68,8 @@ function createTodo(text, date = ''){
     classes: 'task-todo-container'  
 });
 
+todo.id = generateId();
+
 const checkbox = createEl('input', {
     classes: 'todo-checkbox',
     type: 'checkbox'
@@ -128,6 +130,15 @@ function checkboxHandler(checkbox){
         return;
     }
     todo.classList.toggle('checked');
+
+    const todos = getData();
+    for(let i = 0; i < todos.length; i++){
+        if(todos[i].id === todo.id){
+            todos[i].isCheсked = checkbox.checked;
+            break;
+        }
+    }
+    setData(todos);
 }
 
 function deleteBtnHandler(deleteBtn){
@@ -185,3 +196,26 @@ deleteAllBtn.addEventListener('click', ()=>{
     const todos = document.querySelectorAll('.task-todo-container');
     todos.forEach(todo => todo.remove());
 });
+
+localStorage.setItem('todos', JSON.stringify([]));
+
+function getData(){
+
+    const data = localStorage.getItem('todos');
+
+    if(!data){
+        return [];
+    }
+        
+    return JSON.parse(data);
+    
+}
+
+function setData(data){
+    localStorage.setItem('todos', JSON.stringify(data));
+}
+
+
+function generateId(){
+    return Date.now();
+}
