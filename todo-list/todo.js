@@ -8,6 +8,10 @@ function createEl(tag, options = {}) {
         el.classList.add(options.classes);
     }
 
+    if(options.id){
+        el.id = options.id;
+    }
+
     if (options.text) {
         el.textContent = options.text;
     }
@@ -65,10 +69,9 @@ todoForm.append(addBtn);
 
 function createTodo(text, date = ''){
     const todo = createEl('div', {
-    classes: 'task-todo-container'  
+    classes: 'task-todo-container',
+    id: generateId()  
 });
-
-todo.id = generateId();
 
 const checkbox = createEl('input', {
     classes: 'todo-checkbox',
@@ -114,8 +117,8 @@ return todo;
 
 
 
-const newTodo = createTodo('Купить продукты');
-container.append(newTodo); 
+// const newTodo = createTodo('Купить продукты');
+// container.append(newTodo); 
 
 // const newTodo2 = newTodo.cloneNode(true);
 // container.append(newTodo2);
@@ -134,7 +137,7 @@ function checkboxHandler(checkbox){
     const todos = getData();
     for(let i = 0; i < todos.length; i++){
         if(todos[i].id === todo.id){
-            todos[i].isCheсked = checkbox.checked;
+            todos[i].isChecked = checkbox.checked;
             break;
         }
     }
@@ -186,6 +189,17 @@ todoForm.addEventListener('submit', (e) =>{
     if(text){
         const newTodo = createTodo(text);
         container.append(newTodo);
+
+        const todos = getData();
+
+        todos.push({
+            id: newTodo.id,
+            date: new Date().toISOString().split('T')[0].split('-').reverse().join('.'),
+            text: text,
+            isChecked: false
+        });
+        setData(todos);
+
         input.value = '';
         input.focus();
     }
@@ -197,22 +211,22 @@ deleteAllBtn.addEventListener('click', ()=>{
     todos.forEach(todo => todo.remove());
 });
 
-localStorage.setItem('todos', JSON.stringify([]));
+// localStorage.setItem('todos', JSON.stringify([]));
 
 function getData(){
 
-    const data = localStorage.getItem('todos');
+    const todosFromStorage = localStorage.getItem('todosTask');
 
-    if(!data){
+    if(!todosFromStorage ){
         return [];
     }
         
-    return JSON.parse(data);
+    return JSON.parse(todosFromStorage);
     
 }
 
 function setData(data){
-    localStorage.setItem('todos', JSON.stringify(data));
+    localStorage.setItem('todosTask', JSON.stringify(data));
 }
 
 
