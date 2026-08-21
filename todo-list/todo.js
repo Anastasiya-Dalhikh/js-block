@@ -135,12 +135,18 @@ function checkboxHandler(checkbox){
     todo.classList.toggle('checked');
 
     const todos = getData();
-    for(let i = 0; i < todos.length; i++){
-        if(todos[i].id === todo.id){
-            todos[i].isChecked = checkbox.checked;
-            break;
-        }
+    // for(let i = 0; i < todos.length; i++){
+    //     if(todos[i].id === todo.id){
+    //         todos[i].isChecked = checkbox.checked;
+    //         break;
+    //     }
+    // }
+    const found = todos.find(t => t.id === todo.id);
+
+    if(found){
+        found.isChecked = checkbox.checked;
     }
+    
     setData(todos);
 }
 
@@ -150,6 +156,21 @@ function deleteBtnHandler(deleteBtn){
         return;
     }
     todo.remove();
+
+
+    const todos = getData();
+    
+    // const newTodo = [];
+    // for(let i = 0; i < todos.length; i++){
+    //     if(todos[i].id !== todo.id){
+    //         newTodo.push(todos[i]);
+    //     }
+    // }
+    
+    const newTodo = todos.filter(t => t.id !== todo.id);
+
+    setData(newTodo);
+    
 }
 
 
@@ -169,11 +190,6 @@ container.addEventListener('click', (e)=>{
         return;
     }
 
-    // const dateInput = e.target.closest('.todo-date');
-    // if (dateInput) {
-    //     dateInput.showPicker(); 
-    //     return;
-    // }
 });
 
 
@@ -209,27 +225,61 @@ todoForm.addEventListener('submit', (e) =>{
 deleteAllBtn.addEventListener('click', ()=>{
     const todos = document.querySelectorAll('.task-todo-container');
     todos.forEach(todo => todo.remove());
+
+    localStorage.removeItem(todosLSKey);
 });
 
 // localStorage.setItem('todos', JSON.stringify([]));
 
 function getData(){
 
-    const todosFromStorage = localStorage.getItem('todosTask');
+    
+    const todosFromStorage = localStorage.getItem(todosLSKey);
 
     if(!todosFromStorage ){
         return [];
     }
+
+    try{
+       return JSON.parse(todosFromStorage);
+    }catch{
+        return [];
+    }
         
-    return JSON.parse(todosFromStorage);
+   
     
 }
 
 function setData(data){
-    localStorage.setItem('todosTask', JSON.stringify(data));
+    
+    const todosLSKey = 'todosTask';
+    localStorage.setItem(todosLSKey, JSON.stringify(data));
 }
 
 
 function generateId(){
     return Date.now();
 }
+
+
+
+function showTodos(){
+  
+    const todos = getData();
+  
+    for(let i = 0; i < todos.length; i++){
+        const todo = createTodo(todos[i].text);
+        todo.id = todos[i].id;
+        container.append(todo);
+
+        if(todos[i].isChecked){
+            const checkbox = todo.querySelector('.todo-checkbox');
+            checkbox.checked = todos[i].isChecked;
+            todo.classList.add('checked');
+        }
+    }
+
+    
+}
+showTodos();
+
