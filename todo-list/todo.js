@@ -231,6 +231,8 @@ deleteAllBtn.addEventListener('click', ()=>{
 
 // localStorage.setItem('todos', JSON.stringify([]));
 
+const todosLSKey = 'todosTask';
+
 function getData(){
 
     
@@ -252,7 +254,7 @@ function getData(){
 
 function setData(data){
     
-    const todosLSKey = 'todosTask';
+    
     localStorage.setItem(todosLSKey, JSON.stringify(data));
 }
 
