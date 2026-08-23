@@ -39,6 +39,10 @@ const container = createEl('div', {
     classes: 'container'  
 });
 
+const todosContainer = createEl('div', {
+    classes: 'todos-container'
+});
+
 const todoForm = createEl('form', {
     classes: 'todo-form'  
 });
@@ -63,6 +67,7 @@ const addBtn = createEl('button', {
 
 divWrapper.append(container);
 container.append(todoForm);
+container.append(todosContainer);
 todoForm.append(deleteAllBtn);
 todoForm.append(input);
 todoForm.append(addBtn);
@@ -148,6 +153,7 @@ function checkboxHandler(checkbox){
     }
     
     setData(todos);
+    showTodos(todos);
 }
 
 function deleteBtnHandler(deleteBtn){
@@ -155,7 +161,7 @@ function deleteBtnHandler(deleteBtn){
     if(!todo){
         return;
     }
-    todo.remove();
+    // todo.remove();
 
 
     const todos = getData();
@@ -170,7 +176,7 @@ function deleteBtnHandler(deleteBtn){
     const newTodo = todos.filter(t => t.id !== todo.id);
 
     setData(newTodo);
-    
+    showTodos(newTodo);
 }
 
 
@@ -204,7 +210,7 @@ todoForm.addEventListener('submit', (e) =>{
 
     if(text){
         const newTodo = createTodo(text);
-        container.append(newTodo);
+        // todosContainer.append(newTodo);
 
         const todos = getData();
 
@@ -215,6 +221,7 @@ todoForm.addEventListener('submit', (e) =>{
             isChecked: false
         });
         setData(todos);
+        showTodos(todos);
 
         input.value = '';
         input.focus();
@@ -223,10 +230,15 @@ todoForm.addEventListener('submit', (e) =>{
 });
 
 deleteAllBtn.addEventListener('click', ()=>{
-    const todos = document.querySelectorAll('.task-todo-container');
-    todos.forEach(todo => todo.remove());
+    // const todos = document.querySelectorAll('.task-todo-container');
+    // todos.forEach(todo => todo.remove());
 
-    localStorage.removeItem(todosLSKey);
+    // localStorage.removeItem(todosLSKey);
+
+    const emptyTodos =[];
+    setData(emptyTodos);
+    showTodos(emptyTodos);
+
 });
 
 // localStorage.setItem('todos', JSON.stringify([]));
@@ -265,14 +277,15 @@ function generateId(){
 
 
 
-function showTodos(){
+function showTodos(todos){
   
-    const todos = getData();
+    todosContainer.innerHTML = '';
+    
   
     for(let i = 0; i < todos.length; i++){
         const todo = createTodo(todos[i].text);
         todo.id = todos[i].id;
-        container.append(todo);
+        todosContainer.append(todo);
 
         if(todos[i].isChecked){
             const checkbox = todo.querySelector('.todo-checkbox');
@@ -283,5 +296,5 @@ function showTodos(){
 
     
 }
-showTodos();
+showTodos(getData());
 
