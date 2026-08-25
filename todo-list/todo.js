@@ -8,6 +8,10 @@ function createEl(tag, options = {}) {
         el.classList.add(options.classes);
     }
 
+    if(options.id){
+        el.id = options.id;
+    }
+
     if (options.text) {
         el.textContent = options.text;
     }
@@ -35,6 +39,10 @@ const container = createEl('div', {
     classes: 'container'  
 });
 
+const todosContainer = createEl('div', {
+    classes: 'todos-container'
+});
+
 const todoForm = createEl('form', {
     classes: 'todo-form'  
 });
@@ -59,13 +67,15 @@ const addBtn = createEl('button', {
 
 divWrapper.append(container);
 container.append(todoForm);
+container.append(todosContainer);
 todoForm.append(deleteAllBtn);
 todoForm.append(input);
 todoForm.append(addBtn);
 
 function createTodo(text, date = ''){
     const todo = createEl('div', {
-    classes: 'task-todo-container'  
+    classes: 'task-todo-container',
+    id: generateId()  
 });
 
 const checkbox = createEl('input', {
@@ -112,8 +122,8 @@ return todo;
 
 
 
-const newTodo = createTodo('Купить продукты');
-container.append(newTodo); 
+// const newTodo = createTodo('Купить продукты');
+// container.append(newTodo); 
 
 // const newTodo2 = newTodo.cloneNode(true);
 // container.append(newTodo2);
@@ -128,6 +138,22 @@ function checkboxHandler(checkbox){
         return;
     }
     todo.classList.toggle('checked');
+
+    const todos = getData();
+    // for(let i = 0; i < todos.length; i++){
+    //     if(todos[i].id === todo.id){
+    //         todos[i].isChecked = checkbox.checked;
+    //         break;
+    //     }
+    // }
+    const found = todos.find(t => t.id === todo.id);
+
+    if(found){
+        found.isChecked = checkbox.checked;
+    }
+    
+    setData(todos);
+    showTodos(todos);
 }
 
 function deleteBtnHandler(deleteBtn){
@@ -135,7 +161,22 @@ function deleteBtnHandler(deleteBtn){
     if(!todo){
         return;
     }
-    todo.remove();
+    // todo.remove();
+
+
+    const todos = getData();
+    
+    // const newTodo = [];
+    // for(let i = 0; i < todos.length; i++){
+    //     if(todos[i].id !== todo.id){
+    //         newTodo.push(todos[i]);
+    //     }
+    // }
+    
+    const newTodo = todos.filter(t => t.id !== todo.id);
+
+    setData(newTodo);
+    showTodos(newTodo);
 }
 
 
@@ -155,11 +196,6 @@ container.addEventListener('click', (e)=>{
         return;
     }
 
-    // const dateInput = e.target.closest('.todo-date');
-    // if (dateInput) {
-    //     dateInput.showPicker(); 
-    //     return;
-    // }
 });
 
 
@@ -174,7 +210,19 @@ todoForm.addEventListener('submit', (e) =>{
 
     if(text){
         const newTodo = createTodo(text);
-        container.append(newTodo);
+        // todosContainer.append(newTodo);
+
+        const todos = getData();
+
+        todos.push({
+            id: newTodo.id,
+            date: new Date().toISOString().split('T')[0].split('-').reverse().join('.'),
+            text: text,
+            isChecked: false
+        });
+        setData(todos);
+        showTodos(todos);
+
         input.value = '';
         input.focus();
     }
@@ -182,6 +230,71 @@ todoForm.addEventListener('submit', (e) =>{
 });
 
 deleteAllBtn.addEventListener('click', ()=>{
-    const todos = document.querySelectorAll('.task-todo-container');
-    todos.forEach(todo => todo.remove());
+    // const todos = document.querySelectorAll('.task-todo-container');
+    // todos.forEach(todo => todo.remove());
+
+    // localStorage.removeItem(todosLSKey);
+
+    const emptyTodos =[];
+    setData(emptyTodos);
+    showTodos(emptyTodos);
+
 });
+
+// localStorage.setItem('todos', JSON.stringify([]));
+
+const todosLSKey = 'todosTask';
+
+function getData(){
+
+    
+    const todosFromStorage = localStorage.getItem(todosLSKey);
+
+    if(!todosFromStorage ){
+        return [];
+    }
+
+    try{
+       return JSON.parse(todosFromStorage);
+    }catch{
+        return [];
+    }
+        
+   
+    
+}
+
+function setData(data){
+    
+    
+    localStorage.setItem(todosLSKey, JSON.stringify(data));
+}
+
+
+function generateId(){
+    return Date.now();
+}
+
+
+
+function showTodos(todos){
+  
+    todosContainer.innerHTML = '';
+    
+  
+    for(let i = 0; i < todos.length; i++){
+        const todo = createTodo(todos[i].text);
+        todo.id = todos[i].id;
+        todosContainer.append(todo);
+
+        if(todos[i].isChecked){
+            const checkbox = todo.querySelector('.todo-checkbox');
+            checkbox.checked = todos[i].isChecked;
+            todo.classList.add('checked');
+        }
+    }
+
+    
+}
+showTodos(getData());
+
