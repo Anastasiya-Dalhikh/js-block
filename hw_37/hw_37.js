@@ -149,7 +149,7 @@ console.log(getFilmsName(films, "Harry Potter"));
 // где строка входит в название фильма или в его сюжет.
 
 function getNameOrPlot(films, string){
-    return films.filter(film => film.plot.includes(string) || film.plot.includes(string));
+    return films.filter(film => film.title.includes(string) || film.plot.includes(string));
 }
 console.log(getNameOrPlot(films, 'Harry, Ron, and Hermione'));
 
