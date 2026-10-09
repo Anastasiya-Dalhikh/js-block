@@ -33,17 +33,17 @@
 }
 
 .closeIcon {
-    display: none;
+    /* display: none; */
     color: white;
     font-size: 32px;
     line-height: 1;
     font-weight: bold;
 }
 
-.open .burgerIcon {
+/* .open .burgerIcon {
     display: none;
 }
 .open .closeIcon{
     display: block; 
-}
+} */
 
