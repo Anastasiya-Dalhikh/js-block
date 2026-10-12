@@ -3,6 +3,7 @@ import './App.css'
 import { MenuButton } from './components/MenuButton/MenuButton'
 import { Title } from './components/Title/Title'
 import { PostCard } from './components/PostCard/PostCard';
+import { PostList } from './components/PostList/PostList';
 
 const samplePost = {
     id: 1,
@@ -21,7 +22,7 @@ function App() {
   }
   return (
     <>
-      <div className='appHeader'>
+      {/* <div className='appHeader'>
         <Title title='Sign In'/>
         <MenuButton isOpen={isOpen} onClick={handleClick}/>
       </div>
@@ -30,7 +31,9 @@ function App() {
         <PostCard post={samplePost} variant="small" />
         <PostCard post={samplePost} variant="medium" />
         <PostCard post={samplePost} variant="large" />
-      </div> 
+      </div>  */}
+
+      <PostList></PostList>
    </> 
   )
 }

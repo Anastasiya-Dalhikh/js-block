@@ -9,9 +9,8 @@ type PostCardProps = {
   variant: Variant;
 }
 
-
-export const PostCard = ({post, variant}: PostCardProps) =>{
-    const {date, title, text, image} = post;
+const LargePost = ({post, variant}: PostCardProps) =>{
+    const { date, title, text, image } = post;
 
     const formattedDate = new Date(date).toLocaleDateString('en-US', {
         month: 'long',
@@ -19,7 +18,7 @@ export const PostCard = ({post, variant}: PostCardProps) =>{
         year: 'numeric',
     });
 
-     const [countLike, setLike] = useState(0);
+    const [countLike, setLike] = useState(0);
      const [countDislike, setDislike] = useState(0);
      
      const handleClickLike = () =>{
@@ -30,15 +29,14 @@ export const PostCard = ({post, variant}: PostCardProps) =>{
         setDislike(countDislike + 1);
      }
 
-    if(variant === 'large'){
-            return (
+     return (
             <Card variant={'large'}>
                 <Info variant={'large'}>
                     <Content>
                     <DateLabel>{formattedDate}</DateLabel> 
                     <Title variant={'large'}>{title}</Title>
                     
-                    {variant === 'large' && <Text>{text}</Text>}
+                    <Text>{text}</Text>
                     </Content>
 
                     {image && <Image src={image} alt={title} variant={'large'} />}
@@ -46,8 +44,10 @@ export const PostCard = ({post, variant}: PostCardProps) =>{
             
                 <Footer>
                 <IconGroupLeft>
-                    <IconBtn><ThumbsUp /></IconBtn>
-                    <IconBtn><ThumbsDown  /></IconBtn>
+                    <IconBtn onClick={handleClickLike}><ThumbsUp /></IconBtn>
+                    <CountLike>{countLike}</CountLike>
+                    <IconBtn onClick={handleClickDislike}><ThumbsDown /></IconBtn>
+                    <CountDislike>{countDislike}</CountDislike>
                 </IconGroupLeft>
                 <IconGroupRight>
                     <IconBtn><Bookmark /></IconBtn>
@@ -56,10 +56,31 @@ export const PostCard = ({post, variant}: PostCardProps) =>{
                 </Footer>  
             </Card>
         )
-    }
 
-    if(variant === 'medium'){
-        return (
+}
+
+
+const MediumPost = ({post, variant}: PostCardProps) =>{
+    const { date, title, image } = post;
+
+    const formattedDate = new Date(date).toLocaleDateString('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+    });
+
+    const [countLike, setLike] = useState(0);
+     const [countDislike, setDislike] = useState(0);
+     
+     const handleClickLike = () =>{
+        setLike(countLike + 1);
+     }
+     
+     const handleClickDislike = () =>{
+        setDislike(countDislike + 1);
+     }
+
+     return (
             <Card variant={'medium'}>
                 <Info variant={'medium'}>
                     {image && <Image src={image} alt={title} variant={'medium'} />}
@@ -72,8 +93,10 @@ export const PostCard = ({post, variant}: PostCardProps) =>{
                 
                 <Footer>
                 <IconGroupLeft>
-                    <IconBtn><ThumbsUp /></IconBtn>
-                    <IconBtn><ThumbsDown /></IconBtn>
+                    <IconBtn onClick={handleClickLike}><ThumbsUp /></IconBtn>
+                    <CountLike>{countLike}</CountLike>
+                    <IconBtn onClick={handleClickDislike}><ThumbsDown /></IconBtn>
+                    <CountDislike>{countDislike}</CountDislike>
                 </IconGroupLeft>
                 <IconGroupRight>
                     <IconBtn><Bookmark /></IconBtn>
@@ -82,10 +105,31 @@ export const PostCard = ({post, variant}: PostCardProps) =>{
                 </Footer>  
             </Card>
         )
-    }
 
-    if(variant === 'small'){
-        return (
+}
+
+
+const SmallPost = ({post, variant}: PostCardProps) =>{
+    const { date, title, image } = post;
+
+    const formattedDate = new Date(date).toLocaleDateString('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+    });
+
+    const [countLike, setLike] = useState(0);
+     const [countDislike, setDislike] = useState(0);
+     
+     const handleClickLike = () =>{
+        setLike(countLike + 1);
+     }
+     
+     const handleClickDislike = () =>{
+        setDislike(countDislike + 1);
+     }
+
+     return (
             <Card variant={'small'}>
                 <Info variant={'small'}>
                     <Content>
@@ -110,6 +154,27 @@ export const PostCard = ({post, variant}: PostCardProps) =>{
                 </Footer>  
             </Card>
         )
+
+}
+
+export const PostCard = ({post, variant}: PostCardProps) =>{
+
+    if(variant === 'large'){
+        return (
+            <LargePost post={post} variant={variant}></LargePost>
+        )
+    }
+
+    if(variant === 'medium'){
+        return (
+            <MediumPost post={post} variant={variant}></MediumPost>
+        )
+    }
+
+    if(variant === 'small'){
+        return (
+           <SmallPost post={post} variant={variant}></SmallPost>
+        )
     }
     
 }
@@ -127,7 +192,7 @@ const Card = styled.div<{variant: string}>`
     `}
 
      ${props => props.variant === 'medium' && `
-        max-width: 400px;
+        max-width: 500px;
     `}
 
     ${props => props.variant === 'small' && `
