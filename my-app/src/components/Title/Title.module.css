@@ -1,6 +1,6 @@
 .titleContainer{
-    max-width:100px;
-    padding: 15px 10px;
+    width: max-content;
+    padding: 15px 20px;
     text-align: center;
     background-color: rgb(224, 218, 218);
 }
