@@ -37,9 +37,13 @@ export const PostList = () =>{
 
 const Layout = styled.div`
     display: grid;
-    grid-template-columns: 1fr 400px;
+     grid-template-columns: minmax(0, 1fr) 320px;
     gap: 32px;
     padding: 24px;
+
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
 
 `;
 

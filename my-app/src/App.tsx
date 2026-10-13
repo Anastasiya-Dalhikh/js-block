@@ -1,8 +1,8 @@
 import {useState} from 'react';
 import './App.css'
-import { MenuButton } from './components/MenuButton/MenuButton'
-import { Title } from './components/Title/Title'
-import { PostCard } from './components/PostCard/PostCard';
+// import { MenuButton } from './components/MenuButton/MenuButton'
+// import { Title } from './components/Title/Title'
+// import { PostCard } from './components/PostCard/PostCard';
 import { PostList } from './components/PostList/PostList';
 
 const samplePost = {

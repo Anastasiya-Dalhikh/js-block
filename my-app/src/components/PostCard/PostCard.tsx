@@ -1,160 +1,13 @@
 import styled from 'styled-components';
-import { ThumbsUp, ThumbsDown, Bookmark, MoreHorizontal } from 'lucide-react';
-import { useState } from 'react';
 import type { Post, Variant } from '../../types';
+import { LargePost } from './LargePost';
+import { MediumPost } from './MediumPost';
+import { SmallPost } from './SmallPost';
 
 
-type PostCardProps = {
+export type PostCardProps = {
   post: Post;
   variant: Variant;
-}
-
-const LargePost = ({post, variant}: PostCardProps) =>{
-    const { date, title, text, image } = post;
-
-    const formattedDate = new Date(date).toLocaleDateString('en-US', {
-        month: 'long',
-        day: 'numeric',
-        year: 'numeric',
-    });
-
-    const [countLike, setLike] = useState(0);
-     const [countDislike, setDislike] = useState(0);
-     
-     const handleClickLike = () =>{
-        setLike(countLike + 1);
-     }
-     
-     const handleClickDislike = () =>{
-        setDislike(countDislike + 1);
-     }
-
-     return (
-            <Card variant={'large'}>
-                <Info variant={'large'}>
-                    <Content>
-                    <DateLabel>{formattedDate}</DateLabel> 
-                    <Title variant={'large'}>{title}</Title>
-                    
-                    <Text>{text}</Text>
-                    </Content>
-
-                    {image && <Image src={image} alt={title} variant={'large'} />}
-                </Info>
-            
-                <Footer>
-                <IconGroupLeft>
-                    <IconBtn onClick={handleClickLike}><ThumbsUp /></IconBtn>
-                    <CountLike>{countLike}</CountLike>
-                    <IconBtn onClick={handleClickDislike}><ThumbsDown /></IconBtn>
-                    <CountDislike>{countDislike}</CountDislike>
-                </IconGroupLeft>
-                <IconGroupRight>
-                    <IconBtn><Bookmark /></IconBtn>
-                    <IconBtn><MoreHorizontal /></IconBtn>
-                </IconGroupRight>
-                </Footer>  
-            </Card>
-        )
-
-}
-
-
-const MediumPost = ({post, variant}: PostCardProps) =>{
-    const { date, title, image } = post;
-
-    const formattedDate = new Date(date).toLocaleDateString('en-US', {
-        month: 'long',
-        day: 'numeric',
-        year: 'numeric',
-    });
-
-    const [countLike, setLike] = useState(0);
-     const [countDislike, setDislike] = useState(0);
-     
-     const handleClickLike = () =>{
-        setLike(countLike + 1);
-     }
-     
-     const handleClickDislike = () =>{
-        setDislike(countDislike + 1);
-     }
-
-     return (
-            <Card variant={'medium'}>
-                <Info variant={'medium'}>
-                    {image && <Image src={image} alt={title} variant={'medium'} />}
-
-                    <Content>
-                    <DateLabel>{formattedDate}</DateLabel> 
-                    <Title variant={'medium'}>{title}</Title>  
-                    </Content>
-                </Info>
-                
-                <Footer>
-                <IconGroupLeft>
-                    <IconBtn onClick={handleClickLike}><ThumbsUp /></IconBtn>
-                    <CountLike>{countLike}</CountLike>
-                    <IconBtn onClick={handleClickDislike}><ThumbsDown /></IconBtn>
-                    <CountDislike>{countDislike}</CountDislike>
-                </IconGroupLeft>
-                <IconGroupRight>
-                    <IconBtn><Bookmark /></IconBtn>
-                    <IconBtn><MoreHorizontal /></IconBtn>
-                </IconGroupRight>
-                </Footer>  
-            </Card>
-        )
-
-}
-
-
-const SmallPost = ({post, variant}: PostCardProps) =>{
-    const { date, title, image } = post;
-
-    const formattedDate = new Date(date).toLocaleDateString('en-US', {
-        month: 'long',
-        day: 'numeric',
-        year: 'numeric',
-    });
-
-    const [countLike, setLike] = useState(0);
-     const [countDislike, setDislike] = useState(0);
-     
-     const handleClickLike = () =>{
-        setLike(countLike + 1);
-     }
-     
-     const handleClickDislike = () =>{
-        setDislike(countDislike + 1);
-     }
-
-     return (
-            <Card variant={'small'}>
-                <Info variant={'small'}>
-                    <Content>
-                    <DateLabel>{formattedDate}</DateLabel> 
-                    <Title variant={'small'}>{title}</Title>  
-                    
-                </Content>
-                {image && <Image src={image} alt={title} variant={'small'} />}
-                </Info>
-                
-                <Footer>
-                <IconGroupLeft>
-                    <IconBtn onClick={handleClickLike}><ThumbsUp /></IconBtn>
-                    <CountLike>{countLike}</CountLike>
-                    <IconBtn onClick={handleClickDislike}><ThumbsDown /></IconBtn>
-                    <CountDislike>{countDislike}</CountDislike>
-                </IconGroupLeft>
-                <IconGroupRight>
-                    <IconBtn><Bookmark /></IconBtn>
-                    <IconBtn><MoreHorizontal /></IconBtn>
-                </IconGroupRight>
-                </Footer>  
-            </Card>
-        )
-
 }
 
 export const PostCard = ({post, variant}: PostCardProps) =>{
@@ -179,7 +32,7 @@ export const PostCard = ({post, variant}: PostCardProps) =>{
     
 }
 
-const Card = styled.div<{variant: string}>`
+export const Card = styled.div<{variant: string}>`
     background: #f8f9fa;
     border-radius: 8px;
     padding: 24px;
@@ -201,7 +54,7 @@ const Card = styled.div<{variant: string}>`
     `}
 `;
 
-const Info = styled.div<{variant : string}>`
+export const Info = styled.div<{variant : string}>`
     display: flex;
 
     ${props=> props.variant === 'large' && `
@@ -223,12 +76,12 @@ const Info = styled.div<{variant : string}>`
 
 `;
 
-const Content = styled.div`
+export const Content = styled.div`
     display: flex;
     flex-direction: column;
 `;
 
-const Image = styled.img<{variant: string}>`
+export const Image = styled.img<{variant: string}>`
     object-fit: cover;
     
 
@@ -248,13 +101,13 @@ const Image = styled.img<{variant: string}>`
     `}
 `;
 
-const DateLabel = styled.span`
+export const DateLabel = styled.span`
     font-size: 12px;
     color: #888;
     margin-bottom: 8px;
 `;
 
-const Title = styled.h3<{ variant: string }>`
+export const Title = styled.h3<{ variant: string }>`
     margin: 0;
     color: #222;
     line-height: 32px;
@@ -265,14 +118,14 @@ const Title = styled.h3<{ variant: string }>`
 `;
 
 
-const Text = styled.p`
+export const Text = styled.p`
     font-size: 14px;
     color: #555;
     line-height: 28px;
     margin: 0;
 `;
 
-const Footer = styled.div`
+export const Footer = styled.div`
     width:100%;
     padding: 10px 15px;
     display:flex;
@@ -282,7 +135,7 @@ const Footer = styled.div`
     margin-top: auto; 
 `;
 
-const IconGroupLeft = styled.div`
+export const IconGroupLeft = styled.div`
     display: flex;
     gap:10px;
 
@@ -292,7 +145,7 @@ const IconGroupLeft = styled.div`
   }
 `;
 
-const IconGroupRight = styled.div`
+export const IconGroupRight = styled.div`
     display: flex;
     gap:10px;
 
@@ -302,7 +155,7 @@ const IconGroupRight = styled.div`
   }
 `;
 
-const IconBtn = styled.button`
+export const IconBtn = styled.button`
     background: none;
     border: none;
     cursor: pointer;
@@ -314,9 +167,9 @@ const IconBtn = styled.button`
     &:hover { color: #000; }
 `;
 
-const CountLike = styled.span`
+export const CountLike = styled.span`
     font-size: 14px;
 `;
-const CountDislike = styled.span`
+export const CountDislike = styled.span`
     font-size: 14px;
 `;
