@@ -131,7 +131,7 @@ export const Footer = styled.div`
     display:flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #555;
+    border-bottom: 1px solid #c2bfbf;
     margin-top: auto; 
 `;
 
