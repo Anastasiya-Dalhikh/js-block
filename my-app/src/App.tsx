@@ -3,6 +3,8 @@ import './App.css'
 import { SignIn } from './components/pages/SignIn';
 import { Success } from './components/pages/Success';
 import type { Page } from './types';
+import { AllPosts } from './components/pages/AllPosts';
+import { PostList } from './components/PostList/PostList';
 
 
 
@@ -45,7 +47,7 @@ function App() {
       {/* <Layout></Layout> */}
       {/* <SignIn/> */}
       {/* <Success></Success> */}
-      
+      <AllPosts />
    </> 
   )
 }

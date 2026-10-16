@@ -33,24 +33,24 @@ export const PostCard = ({post, variant}: PostCardProps) =>{
 }
 
 export const Card = styled.div<{variant: string}>`
-    background: #f8f9fa;
+    /* background: #f8f9fa; */
     border-radius: 8px;
-    padding: 24px;
+    padding-bottom: 10px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
 
     ${props=> props.variant === 'large' && `
         max-width: 100%;
     `}
 
      ${props => props.variant === 'medium' && `
-        max-width: 500px;
+        max-width: 400px;
     `}
 
     ${props => props.variant === 'small' && `
-        max-width: 300px;
-        height: 250px;
+        max-width: 280px;
+        // height: 250px;
     `}
 `;
 
@@ -59,7 +59,7 @@ export const Info = styled.div<{variant : string}>`
 
     ${props=> props.variant === 'large' && `
         flex-direction: row;
-        justify-content: space-between;
+        gap:24px;
         align-items: flex-start;
     `}
 
@@ -79,6 +79,7 @@ export const Info = styled.div<{variant : string}>`
 export const Content = styled.div`
     display: flex;
     flex-direction: column;
+    
 `;
 
 export const Image = styled.img<{variant: string}>`
@@ -86,8 +87,8 @@ export const Image = styled.img<{variant: string}>`
     
 
     ${props => props.variant === 'large' && `
-        width: 40%;
-        height: 260px;
+        width: 50%;
+        // height: 260px;
   ` }
 
     ${props => props.variant === 'medium' && `
@@ -104,7 +105,7 @@ export const Image = styled.img<{variant: string}>`
 export const DateLabel = styled.span`
     font-size: 12px;
     color: #888;
-    margin-bottom: 8px;
+    margin: 10px 0;
 `;
 
 export const Title = styled.h3<{ variant: string }>`
@@ -113,8 +114,8 @@ export const Title = styled.h3<{ variant: string }>`
     line-height: 32px;
 
     ${props => props.variant === 'large' && `font-size: 24px; margin-bottom: 16px;`}
-    ${props => props.variant === 'medium' && `font-size: 18px; margin-bottom: 12px;`}
-    ${props => props.variant === 'small' && `font-size: 14px; line-height: 22px`}
+    ${props => props.variant === 'medium' && `font-size: 18px;margin-bottom: 14px`}
+    ${props => props.variant === 'small' && `font-size: 12px; line-height: 22px`}
 `;
 
 

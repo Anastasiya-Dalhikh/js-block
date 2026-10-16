@@ -41,7 +41,7 @@ export const SignIn = ({onSuccess}: SuccessProps) =>{
                     <ForgotLink href="#">Forgot password?</ForgotLink>
 
                     <Btn type='submit'>Sign In</Btn>
-                    
+
                     <SignUpText>
                         Don't have an account? <SignUpLink href="/signup">Sign Up</SignUpLink>
                     </SignUpText>
@@ -51,8 +51,8 @@ export const SignIn = ({onSuccess}: SuccessProps) =>{
     )
 }
 
-const Container = styled.div`
-    max-width:1000px;
+export const Container = styled.div`
+    max-width:1100px;
     width:100%;
     margin: 0 auto;
     padding-top: 20px;
