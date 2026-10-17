@@ -3,20 +3,32 @@ import { MenuButton } from '../MenuButton/MenuButton';
 import { SearchBtn } from '../SearchButton/SearchButton';
 import { ProfileBtn  } from '../ProfileButton/ProfileButton';
 import {useState} from 'react';
+import { UserProfile } from '../UserProfile/UserProfile';
 
 
 export const Header = () =>{
     const [isOpen, setIsOpen] = useState(false);
-      const handleClick = () =>{
+
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const user = { firstName: 'John', lastName: 'Smith' };
+
+    const handleClick = () =>{
         setIsOpen(!isOpen);
-      }
+    }
+    
     return(
         <StyledHeader>
             <Container>
                 <MenuButton isOpen={isOpen} onClick={handleClick}/>
                 <NavGroup>
                     <SearchBtn />
-                    <ProfileBtn />
+                    {isLoggedIn ? (
+                        <UserProfile 
+                            firstName={user.firstName} 
+                            lastName={user.lastName} 
+                            onClick={() => {}} />
+                        ) : <ProfileBtn />
+                    }
                 </NavGroup>
                 
             </Container>

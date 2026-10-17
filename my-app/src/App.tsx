@@ -5,6 +5,7 @@ import { Success } from './components/pages/Success';
 import type { Page } from './types';
 import { AllPosts } from './components/pages/AllPosts';
 import { PostList } from './components/PostList/PostList';
+import { UserProfile } from './components/UserProfile/UserProfile';
 
 
 
