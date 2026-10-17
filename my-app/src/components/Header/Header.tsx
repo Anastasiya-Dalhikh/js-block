@@ -5,12 +5,13 @@ import { ProfileBtn  } from '../ProfileButton/ProfileButton';
 import {useState} from 'react';
 import { UserProfile } from '../UserProfile/UserProfile';
 
+const user = { firstName: 'John', lastName: 'Smith' };
 
 export const Header = () =>{
     const [isOpen, setIsOpen] = useState(false);
 
     const [isLoggedIn, setIsLoggedIn] = useState(true);
-    const user = { firstName: 'John', lastName: 'Smith' };
+    
 
     const handleClick = () =>{
         setIsOpen(!isOpen);

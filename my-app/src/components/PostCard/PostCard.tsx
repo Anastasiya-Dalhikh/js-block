@@ -50,7 +50,6 @@ export const Card = styled.div<{variant: string}>`
 
     ${props => props.variant === 'small' && `
         max-width: 280px;
-        // height: 250px;
     `}
 `;
 

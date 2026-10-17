@@ -6,16 +6,16 @@ import { Input } from "../UI/Input/Input"
 import styled from "styled-components"
 
 type SuccessProps = {
-    onSuccess: () => void;
+    onSignIn: () => void;
 }
 
-export const SignIn = ({onSuccess}: SuccessProps) =>{
+export const SignIn = ({onSignIn}: SuccessProps) =>{
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
-        onSuccess();
+        onSignIn();
     }
 
     return(

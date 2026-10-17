@@ -24,8 +24,8 @@ function App() {
   const [page, setPage] = useState<Page>('sign-in');
   return (
     <>
-      {page === 'sign-in' && <SignIn onSuccess={() => setPage('success')} />}
-      {page === 'success' && <Success onGoHome={() => setPage('sign-in')} />}
+      {page === 'sign-in' && <SignIn onSignIn={() => setPage('success')} />}
+      {page === 'success' && <Success onGoHomeClick={() => setPage('sign-in')} />}
      
       {/* <div className='appHeader'>
         <Title title='Sign In'/>

@@ -5,10 +5,10 @@ import { Btn } from "../UI/Button/Button"
 import styled from "styled-components";
 
 type SuccessProps = {
-    onGoHome: () => void;
+    onGoHomeClick: () => void;
 };
 
-export const Success = ({ onGoHome }: SuccessProps) => {
+export const Success = ({ onGoHomeClick }: SuccessProps) => {
   return (
     <Layout>
       <Container>
@@ -18,7 +18,7 @@ export const Success = ({ onGoHome }: SuccessProps) => {
         <Message>
           <TextConfirmation>Email confirmed</TextConfirmation>
           <TextRegistration>Your registration is now confirmed.</TextRegistration>
-          <Btn type='button' onClick={onGoHome}>Go to home</Btn>
+          <Btn type='button' onClick={onGoHomeClick }>Go to home</Btn>
         </Message>
       </Container>
     </Layout>
