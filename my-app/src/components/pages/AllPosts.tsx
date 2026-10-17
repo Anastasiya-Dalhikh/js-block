@@ -3,6 +3,7 @@ import { Layout } from "../Layout/Layout"
 import { Title } from "../Title/Title"
 import { Container } from "./SignIn"
 import { PostList } from "../PostList/PostList"
+import { Pagination } from "../Pagination/Pagination"
 
 
 export const AllPosts = () =>{
@@ -11,8 +12,8 @@ export const AllPosts = () =>{
             <Container>
                 <Title title='Blog' />
 
-                    <PostList showLargePost={false}/>
-
+                <PostList showLargePost={false}/>
+                <Pagination />
             </Container>
             
         </Layout>
