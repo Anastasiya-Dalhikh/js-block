@@ -4,10 +4,10 @@ import { SignIn } from './components/pages/SignIn';
 import { Success } from './components/pages/Success';
 import type { Page } from './types';
 import { AllPosts } from './components/pages/AllPosts';
-import { PostList } from './components/PostList/PostList';
-import { UserProfile } from './components/UserProfile/UserProfile';
-import { SelectedPost } from './components/SelectedPost/SelectedPost';
 import { posts } from './constants';
+import { SignUp } from './components/pages/SignUp';
+import { RegistrationConfirmation } from './components/pages/RegistrationConfirmation';
+import { SelectedPost } from './components/pages/SelectedPost';
 
 
 
@@ -24,34 +24,20 @@ const testPost = posts[0];
 function App() {
   
   const [page, setPage] = useState<Page>('sign-in');
+  
   return (
     <>
-      {page === 'sign-in' && <SignIn onSignIn={() => setPage('success')} />}
-      {page === 'success' && <Success onGoHomeClick={() => setPage('sign-in')} />}
-     
-      {/* <div className='appHeader'>
-        <Title title='Sign In'/>
-        <MenuButton isOpen={isOpen} onClick={handleClick}/>
-      </div>
+      {page === 'sign-in' && <SignIn 
+      onSignIn={() => setPage('success')}
+      />}
+      {page === 'success' && <Success 
+      onGoHomeClick={() => setPage('sign-in')} 
+      />}
 
-      <div className='postCardsContainer'>
-        <PostCard post={samplePost} variant="small" />
-        <PostCard post={samplePost} variant="medium" />
-        <PostCard post={samplePost} variant="large" />
-      </div>  */}
-
-      {/* <PostList></PostList> */}
-      {/* <Btn type="submit">Sign In</Btn>
-      <Btn type="submit">Get to home</Btn>
-      <Input type='password' value="" label='password' placeholder='enter password' onChange={() => {}} /> 
-      <Header />
-      <Footer leftText='©2022 Blogfolio' rightText='All rights reserved' /> */}
-
-      {/* <Layout></Layout> */}
-      {/* <SignIn/> */}
-      {/* <Success></Success> */}
+      <SignUp />
+      <RegistrationConfirmation />
+      <SelectedPost post={testPost}/>
       <AllPosts />
-      <SelectedPost post={testPost} />
    </> 
   )
 }
