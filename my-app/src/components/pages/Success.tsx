@@ -11,27 +11,17 @@ type SuccessProps = {
 export const Success = ({ onGoHomeClick }: SuccessProps) => {
   return (
     <Layout>
-      <Container>
         <BackLink href="#">Back to home</BackLink>
         <Title title="Success" />
-        
         <Message>
           <TextConfirmation>Email confirmed</TextConfirmation>
           <TextRegistration>Your registration is now confirmed.</TextRegistration>
           <Btn type='button' onClick={onGoHomeClick }>Go to home</Btn>
         </Message>
-      </Container>
     </Layout>
   )
 }
 
-
-const Container = styled.div`
-    max-width:1000px;
-    width:100%;
-    margin: 0 auto;
-    padding-top: 20px;
-`;
 
 const BackLink = styled.a`
     font-size: 12px;

@@ -13,7 +13,9 @@ export const Layout = ({children}: LayoutProps) => {
         <Wrapper>
             <Header />
                 <Main>
-                {children}
+                    <Container>
+                        {children}
+                    </Container>
                 </Main>
             <Footer leftText='©2022 Blogfolio' rightText='All rights reserved' />
         </Wrapper>
@@ -33,4 +35,12 @@ const Main = styled.main`
     flex:1;
     background-color: #e7e5e5;
    
+`;
+
+const Container = styled.div`
+    max-width:1100px;
+    width:100%;
+    margin: 0 auto;
+    padding-top: 20px;
+
 `;

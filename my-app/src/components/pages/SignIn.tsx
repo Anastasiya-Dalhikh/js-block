@@ -20,7 +20,6 @@ export const SignIn = ({onSignIn}: SuccessProps) =>{
 
     return(
         <Layout>
-            <Container>
                 <BackLink href="#">Back to home</BackLink>
                 <Title title="Sign In" />
                 <Form onSubmit = {handleSubmit}>
@@ -46,18 +45,11 @@ export const SignIn = ({onSignIn}: SuccessProps) =>{
                         Don't have an account? <SignUpLink href="/signup">Sign Up</SignUpLink>
                     </SignUpText>
                 </Form>
-            </Container>
         </Layout>
     )
 }
 
-export const Container = styled.div`
-    max-width:1100px;
-    width:100%;
-    margin: 0 auto;
-    padding-top: 20px;
-    /* border: 1px solid black; */
-`;
+
 
 const BackLink = styled.a`
     font-size: 12px;

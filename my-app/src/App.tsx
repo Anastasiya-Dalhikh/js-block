@@ -6,6 +6,8 @@ import type { Page } from './types';
 import { AllPosts } from './components/pages/AllPosts';
 import { PostList } from './components/PostList/PostList';
 import { UserProfile } from './components/UserProfile/UserProfile';
+import { SelectedPost } from './components/SelectedPost/SelectedPost';
+import { posts } from './constants';
 
 
 
@@ -18,9 +20,9 @@ import { UserProfile } from './components/UserProfile/UserProfile';
 //     title: 'Astronauts prep for new solar arrays on nearly seven-hour spacewalk',
 //     author: 1,
 // };
-
+const testPost = posts[0]; 
 function App() {
-
+  
   const [page, setPage] = useState<Page>('sign-in');
   return (
     <>
@@ -49,6 +51,7 @@ function App() {
       {/* <SignIn/> */}
       {/* <Success></Success> */}
       <AllPosts />
+      <SelectedPost post={testPost} />
    </> 
   )
 }
