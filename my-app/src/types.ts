@@ -10,4 +10,4 @@ export interface Post {
 
 export type Variant = 'large' | 'medium' | 'small';
 
-export type Page = 'sign-in' | 'success' | 'all-posts' | 'selected post' | 'sign-up';
+export type Page = 'sign-in' | 'success' | 'all-posts' | 'selected post' | 'sign-up' | 'registration-confirmation';

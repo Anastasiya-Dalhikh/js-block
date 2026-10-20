@@ -11,5 +11,6 @@
     font-weight: 700;
     color: rgb(34, 34, 34);
     margin: 0;
+    white-space: nowrap;
     
 }
