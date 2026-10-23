@@ -19,8 +19,8 @@ const Button = styled.button`
     min-width: 300px;
     display:block;
     padding: 10px 15px;
-    background-color: #1e3a8a;
-    color: white;
+    background-color:${({ theme }) => theme.colors.btnBg};
+    color: ${({ theme }) => theme.colors.btnText};
     border: none;
     border-radius: 4px;
     font-size: 14px;
@@ -29,6 +29,6 @@ const Button = styled.button`
     transition: background-color 0.2s;
 
     &:hover{
-        background-color: #1e40af;
+        background-color: ${({ theme }) => theme.colors.btnHover};
     }
 `

@@ -1,12 +1,13 @@
-import { posts } from '../../constants';
 import styled from 'styled-components';
 import { PostCard } from '../PostCard/PostCard';
+import type { Post } from '../../types';
 
 type PostListProps = {
     showLargePost: boolean;
+    posts: Post[];
 }
 
-export const PostList = ({ showLargePost = true }: PostListProps) =>{
+export const PostList = ({ showLargePost = true, posts }: PostListProps) =>{
 
     const largePost = showLargePost ? posts.slice(0,1) : [];
     const mediumPost = showLargePost ? posts.slice(1,5) : posts.slice(0, 4);

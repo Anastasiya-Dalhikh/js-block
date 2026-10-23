@@ -8,6 +8,11 @@ import { posts } from './constants';
 import { SignUp } from './components/pages/SignUp';
 import { RegistrationConfirmation } from './components/pages/RegistrationConfirmation';
 import { SelectedPost } from './components/pages/SelectedPost';
+import { GlobalStyle } from './styles/GlobalStyle';
+import { AppThemeProvider } from './context/ThemeContext';
+import { RouterProvider } from 'react-router';
+import { SearchProvider } from './context/SearchContext';
+// import {router} from './router/router'
 
 
 
@@ -26,7 +31,12 @@ function App() {
   const [page, setPage] = useState<Page>('sign-in');
   
   return (
-    <>
+    <AppThemeProvider>
+      <SearchProvider>
+      <GlobalStyle />
+
+      {/* <RouterProvider router={router} /> */}
+
       {page === 'sign-in' && <SignIn 
       onSignIn={() => setPage('success')}
       />}
@@ -38,7 +48,9 @@ function App() {
       <RegistrationConfirmation />
       <SelectedPost post={testPost}/>
       <AllPosts />
-   </> 
+
+      </SearchProvider>
+   </AppThemeProvider> 
   )
 }
 
