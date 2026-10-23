@@ -18,7 +18,7 @@ export const Footer = ({leftText, rightText}: FooterProps) =>{
 }
 
 const StyledFooter = styled.footer`
-    background-color: #e7e5e5;
+    background-color: ${({theme}) => theme.colors.pageBg};
 `;
 
 const Container = styled.div`
@@ -26,7 +26,7 @@ const Container = styled.div`
     width: 100%;
     margin: 0 auto;
     padding: 20px 15px;
-    border-top:1px solid #c2bfbf;
+    border-top:1px solid ${({theme}) => theme.colors.border};
     
 
     display: flex;
@@ -36,7 +36,7 @@ const Container = styled.div`
 
 const Text = styled.p`
     margin: 0;
-    color: #9a9a9a;
+    color: ${({theme}) => theme.colors.secondaryText};
     font-size: 12px;
-    font-family: inherit;
+    /* font-family: inherit; */
 `;

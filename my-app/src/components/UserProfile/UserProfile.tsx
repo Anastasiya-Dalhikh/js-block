@@ -26,11 +26,11 @@ const UserProfileBtn = styled.button`
     border: none;
     cursor: pointer;
     padding: 10px 15px;
-    background-color: #1e3a8a;
+    background-color: ${({theme}) => theme.colors.btnBg};
     gap: 10px;
 
     &:hover{
-        background-color: #1e40af;
+        background-color: ${({theme}) => theme.colors.btnHover};
     }
 `;
 
@@ -43,20 +43,20 @@ const Avatar = styled.span`
     font-weight: 600;
     font-size: 14px;
 
-    background-color: #dbeafe; 
-    color: #1e3a8a; 
+    background-color: ${({theme}) => theme.colors.btnText};
+    color: ${({theme}) => theme.colors.btnBg};
 
 `;
 
 const Name = styled.span`
     font-weight: 600;
     font-size: 14px;
-    color: #dbeafe;
+    color: ${({theme}) => theme.colors.btnText};
     white-space: nowrap;
 `;
 
 const StyledChevron = styled.span`
-    color: #f7f7f7;
+    color: ${({theme}) => theme.colors.btnText};
     transition: transform 0.2s ease;
 
 `;

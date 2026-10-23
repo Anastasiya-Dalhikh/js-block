@@ -53,13 +53,13 @@ export const SignIn = ({onSignIn}: SuccessProps) =>{
 
 const BackLink = styled.a`
     font-size: 12px;
-    color: #6b7280;
+    color: ${({theme}) => theme.colors.secondaryText};
     text-decoration: none;
     margin-bottom: 10px;
     display: inline-block;
 
     &:hover {
-        color: #1e3a8a;
+        color: ${({theme}) => theme.colors.btnHover};
     }
 `;
 
@@ -69,8 +69,8 @@ const Form = styled.form`
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    background: #e7e5e5;
-    border: 1px solid #c2bfbf;
+    background: ${({theme}) => theme.colors.formBg};
+    border: 1px solid ${({theme}) => theme.colors.border};
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
@@ -80,24 +80,24 @@ const Form = styled.form`
 const ForgotLink = styled.a`
     align-self:flex-start;
     font-size: 12px;
-    color: #6b7280;
+    color: ${({theme}) => theme.colors.link};
     text-decoration: none;
     margin-bottom: 20px;
 
     &:hover {
-        color: #1e3a8a;
+        color: ${({theme}) => theme.colors.btnHover};
     }
 `;
 
 const SignUpText = styled.p`
     text-align: center;
     font-size: 12px;
-    color: #6b7280;
+    color: ${({theme}) => theme.colors.secondaryText};
     margin-top: 15px;
 `;
 
 const SignUpLink = styled.a`
-    color: #1e3a8a;
+    color: ${({theme}) => theme.colors.btnBg};
     text-decoration: none;
     font-weight: 500;
 

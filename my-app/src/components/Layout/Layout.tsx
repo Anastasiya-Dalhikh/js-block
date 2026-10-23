@@ -33,7 +33,7 @@ const Wrapper = styled.div`
 
 const Main = styled.main`
     flex:1;
-    background-color: #e7e5e5;
+    background-color: ${({theme}) => theme.colors.pageBg };
    
 `;
 

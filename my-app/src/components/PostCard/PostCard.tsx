@@ -3,6 +3,7 @@ import type { Post, Variant } from '../../types';
 import { LargePost } from './LargePost';
 import { MediumPost } from './MediumPost';
 import { SmallPost } from './SmallPost';
+import { SearchResultItem } from './SearchResultItem';
 
 
 export type PostCardProps = {
@@ -29,11 +30,17 @@ export const PostCard = ({post, variant}: PostCardProps) =>{
            <SmallPost post={post} variant={variant}></SmallPost>
         )
     }
+
+    if(variant === 'search'){
+        return (
+            <SearchResultItem post={post} variant={variant}></SearchResultItem>
+        )
+    }
     
 }
 
 export const Card = styled.div<{variant: string}>`
-    /* background: #f8f9fa; */
+    background: ${({ theme }) => theme.colors.cardBg};
     border-radius: 8px;
     padding-bottom: 10px;
     display: flex;
@@ -50,6 +57,11 @@ export const Card = styled.div<{variant: string}>`
 
     ${props => props.variant === 'small' && `
         max-width: 280px;
+    `}
+
+    ${props => props.variant === 'search' && `
+        max-width: 100%;
+        width: 100%;
     `}
 `;
 
@@ -73,11 +85,28 @@ export const Info = styled.div<{variant : string}>`
         align-items: flex-start;
     `}
 
+    ${props => props.variant === 'search' && `
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+    `}
+
 `;
 
-export const Content = styled.div`
+export const Content = styled.div<{variant : string}>`
     display: flex;
     flex-direction: column;
+
+    ${props => props.variant === 'search' && `
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex: 1;
+        min-height: 150px;
+        gap: 15px;
+
+    `}
     
 `;
 
@@ -99,28 +128,35 @@ export const Image = styled.img<{variant: string}>`
         width: 80px;
         height: 80px;
     `}
+
+    ${props => props.variant === 'search' && `
+        width: 100px;
+        height: 80px;
+        flex-shrink: 0;
+    `}
 `;
 
 export const DateLabel = styled.span`
     font-size: 12px;
-    color: #888;
+    color: ${({ theme }) => theme.colors.secondaryText};
     margin: 10px 0;
 `;
 
 export const Title = styled.h3<{ variant: string }>`
     margin: 0;
-    color: #222;
+    color: ${({ theme }) => theme.colors.primaryText};
     line-height: 32px;
 
     ${props => props.variant === 'large' && `font-size: 24px; margin-bottom: 16px;`}
     ${props => props.variant === 'medium' && `font-size: 18px;margin-bottom: 14px`}
     ${props => props.variant === 'small' && `font-size: 12px; line-height: 22px`}
+    ${props => props.variant === 'search' && `font-size: 15px; line-height: 22px; margin: 5px 0 0;`}
 `;
 
 
 export const Text = styled.p`
     font-size: 14px;
-    color: #555;
+    color: ${({ theme }) => theme.colors.secondaryText};
     line-height: 28px;
     margin: 0;
 `;
@@ -159,12 +195,14 @@ export const IconBtn = styled.button`
     background: none;
     border: none;
     cursor: pointer;
-    color: #555;
+    color: ${({ theme }) => theme.colors.secondaryText};
     padding: 0;
     display: flex;
     align-items: center;
 
-    &:hover { color: #000; }
+    &:hover { 
+        color: ${({ theme }) => theme.colors.primaryText}; 
+    }
 `;
 
 export const CountLike = styled.span`

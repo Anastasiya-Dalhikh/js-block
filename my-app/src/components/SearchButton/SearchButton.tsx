@@ -17,7 +17,7 @@ export const SearchBtn = ({type = 'button', onClick}:SearchBtnProps) =>{
 const Button = styled.button`
     width: 55px;
     height: 55px;
-    background-color: #1e3a8a;
+    background-color: ${({theme}) => theme.colors.btnBg};
     border: none;
     display: flex;
     justify-content: center;
@@ -27,7 +27,7 @@ const Button = styled.button`
     transition: background-color 0.2s ease, transform 0.1s ease; 
 
     &:hover{
-        background-color: #1e40af;
+        background-color: ${({theme}) => theme.colors.btnHover};
     }
 
     &:active{
@@ -36,7 +36,7 @@ const Button = styled.button`
 `;
 
 const SearchIcon = styled.span`
-    color: white;
+    color: ${({theme}) => theme.colors.btnText};
     display: flex;
     align-items: center;
     justify-content: center;
