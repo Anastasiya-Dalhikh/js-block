@@ -7,6 +7,7 @@ import { UserProfile } from '../UserProfile/UserProfile';
 import { Moon, Sun } from 'lucide-react';
 import { ThemeContext } from '../../context/ThemeContext';
 import { useSearchContext } from '../../context/SearchContext';
+import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
 
 
 const user = { firstName: 'John', lastName: 'Smith' };
@@ -15,29 +16,33 @@ const user = { firstName: 'John', lastName: 'Smith' };
 export const Header = () =>{
     const [isOpen, setIsOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(true);
-    const [isSearchOpen, setIsSearchOpen] = useState(false); // открыт ли поиск
-    const [text, setText] = useState(''); // что ввели в поиск
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
     
     const {theme, toggleTheme } = useContext(ThemeContext);
-    const { setSearchValue } = useSearchContext(); 
+    const { searchValue, setSearchValue } = useSearchContext(); 
 
     const handleClick = () =>{
         setIsOpen(!isOpen);
     }
 
     const handleSearchSubmit = (e: SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    if(!text) return;
+        if(!searchValue.trim()) return;
 
-    setIsSearchOpen(false);
-    setSearchValue(text);
-    setText('');
+        setIsSearchOpen(false);
 };
+
+    const handleSearchClose = () =>{
+        setIsSearchOpen(false);
+        setSearchValue('');
+    }
 
 
     
     return(
+        <>
+        <BurgerMenu isOpen={isOpen} onClose={() => setIsOpen(false)} />
         <StyledHeader>
             <Container>
                 <MenuButton isOpen={isOpen} onClick={handleClick}/>
@@ -47,18 +52,18 @@ export const Header = () =>{
                                 <SearchInput
                                 autoFocus
                                 type='text'
-                                value={text}
+                                value={searchValue}
                                 placeholder='Search ...'
-                                onChange={(e) => setText(e.target.value)}
+                                onChange={(e) => setSearchValue(e.target.value)}
                                 />
-                                <CloseBtn type='button' onClick={() => setIsSearchOpen(false)}>
+                                <CloseBtn type='button' onClick={handleSearchClose}>
                                     X
                                 </CloseBtn>
                             </SearchForm>   
                         )
                     }
                 <NavGroup>
-                    <SearchBtn onClick={() => setIsSearchOpen(!isSearchOpen)}/>
+                    <SearchBtn onClick={() => isSearchOpen ? setIsSearchOpen(false) : setIsSearchOpen(true) }/>
                     
                     {isLoggedIn ? (
                         <UserProfile 
@@ -75,12 +80,16 @@ export const Header = () =>{
             </Container>
             
         </StyledHeader>
+        </>
     )
     
 }
 
 const StyledHeader = styled.header`
     background-color: ${({theme}) => theme.colors.headerBg};
+
+    position: relative;
+    z-index: 1001;  
 `;
 
 const Container = styled.div`

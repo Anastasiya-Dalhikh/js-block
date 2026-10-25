@@ -14,7 +14,7 @@ export const UserProfile = ({firstName, lastName, onClick}:UserProfileProps) =>{
         <UserProfileBtn onClick={onClick}>
             <Avatar>{initials}</Avatar>
             <Name>{fullName}</Name>
-            <StyledChevron><ChevronDown /></StyledChevron>
+            {/* <StyledChevron><ChevronDown /></StyledChevron> */}
         </UserProfileBtn>
     )
 }
@@ -22,10 +22,10 @@ export const UserProfile = ({firstName, lastName, onClick}:UserProfileProps) =>{
 const UserProfileBtn = styled.button`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 8px;
     border: none;
     cursor: pointer;
-    padding: 10px 15px;
+    padding: 10px 25px;
     background-color: ${({theme}) => theme.colors.btnBg};
     gap: 10px;
 
@@ -55,8 +55,8 @@ const Name = styled.span`
     white-space: nowrap;
 `;
 
-const StyledChevron = styled.span`
-    color: ${({theme}) => theme.colors.btnText};
-    transition: transform 0.2s ease;
+// const StyledChevron = styled.span`
+//     color: ${({theme}) => theme.colors.btnText};
+//     transition: transform 0.2s ease;
 
-`;
+// `;

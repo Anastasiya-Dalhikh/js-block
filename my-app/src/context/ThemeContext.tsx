@@ -1,4 +1,4 @@
-import { createContext, useState, type PropsWithChildren } from "react";
+import { createContext, useContext, useState, type PropsWithChildren } from "react";
 import { darkTheme, lightTheme } from "../styles/theme";
 import { ThemeProvider } from "styled-components";
 
@@ -29,4 +29,12 @@ export const AppThemeProvider = ({children} : PropsWithChildren) =>{
             </ThemeProvider>
         </ThemeContext.Provider>
     )
+}
+
+export const useThemeContext = () =>{
+    const context = useContext(ThemeContext);
+    if (!context) {
+        throw new Error('missing SearchProvider');
+    }    
+    return context;
 }
