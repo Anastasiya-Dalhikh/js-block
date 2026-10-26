@@ -38,6 +38,10 @@ export const Header = () =>{
         setSearchValue('');
     }
 
+    const handleSearchBtn = () => {
+        isSearchOpen ? setIsSearchOpen(false) : setIsSearchOpen(true);
+    }
+
 
     
     return(
@@ -63,7 +67,7 @@ export const Header = () =>{
                         )
                     }
                 <NavGroup>
-                    <SearchBtn onClick={() => isSearchOpen ? setIsSearchOpen(false) : setIsSearchOpen(true) }/>
+                    <SearchBtn onClick={handleSearchBtn}/>
                     
                     {isLoggedIn ? (
                         <UserProfile 
