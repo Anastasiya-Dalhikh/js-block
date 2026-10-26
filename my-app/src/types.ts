@@ -8,6 +8,6 @@ export interface Post {
     author?: number;
 }
 
-export type Variant = 'large' | 'medium' | 'small';
+export type Variant = 'large' | 'medium' | 'small' | 'search';
 
 export type Page = 'sign-in' | 'success' | 'all-posts' | 'selected post' | 'sign-up' | 'registration-confirmation';

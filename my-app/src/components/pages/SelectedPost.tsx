@@ -32,7 +32,7 @@ const PathInfo = styled.button`
     background: none;
     border: none;
     padding: 0;
-    color: #6b7280;
+    color: ${({theme}) => theme.colors.secondaryText};
     cursor: pointer;
     font-size: 12px;
 
@@ -43,11 +43,11 @@ const PathInfo = styled.button`
 `;
 
 const Separator = styled.span`
-    color: #9ca3af;
+    color: ${({theme}) => theme.colors.secondaryText};
 `;
 
 const PathInfoCurrent = styled.span`
-    color: #9ca3af;
+    color: ${({theme}) => theme.colors.secondaryText};
     max-width: 300px;
     white-space: nowrap;
     overflow: hidden;
@@ -58,9 +58,10 @@ const PathInfoCurrent = styled.span`
 const PostTitle = styled.h1`
     font-size: 36px;
     font-weight: 700;
-    color: #111827;
+    color: ${({theme}) => theme.colors.primaryText};
     line-height: 1.3;
     margin-bottom: 30px;
+    margin-top:10px;
 `;
 
 const PostImage = styled.img`
@@ -74,7 +75,7 @@ const PostImage = styled.img`
 const PostText = styled.p`
     font-size: 16px;
     line-height: 1.6;
-    color: #374151;
+    color: ${({theme}) => theme.colors.secondaryText};
     max-width: 900px;
     margin: 0 auto 30px;
 `;
